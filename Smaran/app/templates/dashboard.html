@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-between mb-4">
+    <h2><i class="fas fa-calendar-alt"></i> SMARAN Dashboard</h2>
+    <a href="/logout" class="btn btn-outline-danger">Logout</a>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">Add New Item</div>
+            <div class="card-body">
+                <form action="/add_task" method="POST">
+                    <div class="mb-2">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g. Physics Exam" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Category</label>
+                        <select name="category" class="form-select">
+                            <option value="Exam">Exam 🔴</option>
+                            <option value="Assignment">Assignment 🔵</option>
+                            <option value="ToDo">To-Do 🟢</option>
+                        </select>
+                    </div>
+                    <div class="mb-2">
+                        <label>Date</label>
+                        <input type="date" name="date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Time</label>
+                        <input type="time" name="time" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add to Schedule</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h4>Pending Schedule</h4>
+        {% if tasks %}
+        <div class="list-group shadow-sm mb-4">
+            {% for task in tasks %}
+            <div class="list-group-item d-flex justify-content-between align-items-center {% if task.deadline < now %}list-group-item-danger{% endif %}">
+                <div>
+                    <h5 class="mb-1">
+                        {% if task.category == 'Exam' %}🔴{% elif task.category == 'Assignment' %}🔵{% else %}🟢{% endif %} 
+                        {{ task.title }}
+                    </h5>
+                    <small class="text-muted">
+                        <i class="far fa-clock"></i> {{ task.deadline.strftime('%d %b, %I:%M %p') }}
+                        {% if task.deadline < now %} 
+                            <span class="badge bg-danger">OVERDUE!</span>
+                        {% else %}
+                            (Remaining: {{ (task.deadline - now).days }} days)
+                        {% endif %}
+                    </small>
+                </div>
+                <div>
+                    <a href="/complete/{{ task.id }}" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Done</a>
+                    <a href="/delete/{{ task.id }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="alert alert-info">No pending work! Enjoy your day.</div>
+        {% endif %}
+
+        {% if completed %}
+        <h5 class="text-muted mt-4">Recently Completed</h5>
+        <ul class="list-group opacity-75">
+            {% for task in completed %}
+            <li class="list-group-item list-group-item-light text-decoration-line-through">
+                {{ task.title }} <small>({{ task.deadline.strftime('%d %b') }})</small>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
