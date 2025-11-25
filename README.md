@@ -47,7 +47,7 @@ Students frequently struggle with managing multiple deadlines across different s
 
 1.  **Clone the repository** (or download files):
     ```bash
-    git clone [https://github.com/yourusername/smaran.git](https://github.com/yourusername/smaran.git)
+    git clone 
     ```
 2.  **Install dependencies**:
     ```bash
