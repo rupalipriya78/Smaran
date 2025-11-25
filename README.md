@@ -1,81 +1,85 @@
-SMARAN – Assignment, Exam & To-Do Tracker
+# SMARAN – Assignment, Exam & To-Do Tracker
 
-Smaran is a simple and aesthetic productivity tool designed for students to manage 
-their assignment deadlines, exam schedules, and daily to-do tasks. It helps 
-students stay organized by displaying all upcoming tasks in one place and allowing 
-them to mark completed tasks or delete unnecessary entries.
+##  Project Overview
+**Smaran** (Remembrance) is a simple and aesthetic productivity tool designed specifically for students. It acts as a centralized academic planner to manage assignment deadlines, exam schedules, and daily to-do tasks. 
 
----
-Features
-
-Add Items
-- Add assignments along with their submission dates  
-- Add exams with exam dates  
-- Add simple daily to-do tasks  
-
-View Tasks
-- Display all tasks in a clean and organized list  
-- Separate categories for Assignments, Exams, and To-Dos  
-
- Manage Tasks
-- Mark completed items → shows strike-through  
-- Delete tasks if added by mistake or no longer required  
-
-Aesthetic UI  
-- Clean, simple, minimal HTML interface  
-- Python backend for handling task logic  
+By distinguishing between urgent academic deadlines and regular tasks, Smaran helps students stay organized, reduce anxiety, and ensure no deadline is ever missed.
 
 ---
 
-Problem Statement
+##  Problem Statement
+Students frequently struggle with managing multiple deadlines across different subjects. Without a unified tracking system, tasks get lost in WhatsApp groups or mental notes, leading to:
+* Missed assignment submissions.
+* Lack of preparation time for exams.
+* Decreased overall productivity.
 
-Students frequently struggle with managing multiple deadlines, exams, and daily 
-responsibilities. Without a unified tracking system, tasks get lost, deadlines are 
-missed, and productivity decreases.
-
-**Smaran solves this by providing a unified platform** to add, view, manage, and 
-complete all academic tasks in a structured and stress-free way.
-
----
-
-Objectives
-
-- Help students track assignments and exam dates easily  
-- Provide a reminder-like task list experience  
-- Improve organization and reduce missed deadlines  
-- Provide easy editing (delete) and completion marking (strike-through)  
+**Smaran solves this** by providing a unified, color-coded platform to add, view, manage, and complete all academic tasks in a structured way.
 
 ---
 
-System Architecture
+## Features
 
-User → HTML UI → Python Logic → Task Storage → Updated UI Output
+### 1. Smart Categorization
+*  **Exams:** Highlighted for high priority.
+*  **Assignments:** Distinct color for submission tracking.
+*  **To-Dos:** For daily non-academic tasks.
 
----
+### 2. Task Management
+* **Add Items:** Input title, category, date, and time.
+* **Deadline Tracking:** Automatically calculates time remaining.
+* **Visual Status:** Mark items as **Completed** (strike-through) or **Delete** unwanted entries.
 
- Tech Stack
-
-- Python – Backend logic  
-- HTML/CSS– UI (frontend)  
-- Local storage / variables – To store tasks  
-
----
-
- Functional Requirements
-
-1. Add assignment with title and deadline  
-2. Add exam with subject and date  
-3. Add regular to-do tasks  
-4. View full task list  
-5. Mark tasks as completed  
-6. Delete tasks  
+### 3. Aesthetic UI
+* Clean, minimalist interface designed for focus.
+* Responsive design using Bootstrap 5.
 
 ---
 
-Non-Functional Requirements
+##  Tech Stack
+* **Backend:** Python (Flask)
+* **Database:** SQLite (SQLAlchemy) - *Ensures data is saved permanently.*
+* **Frontend:** HTML5, CSS3, Bootstrap 5
+* **Templating:** Jinja2
 
-- High usability  
-- Clean UI  
-- Fast performance  
-- Easy maintainability  
-- Accurate updates
+---
+
+##  Steps to Install & Run
+
+1.  **Clone the repository** (or download files):
+    ```bash
+    git clone [https://github.com/yourusername/smaran.git](https://github.com/yourusername/smaran.git)
+    ```
+2.  **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Run the application**:
+    ```bash
+    python run.py
+    ```
+4.  **Open in Browser**:
+    Go to `http://127.0.0.1:5001`
+
+---
+
+##  Instructions for Testing
+
+1.  **Register/Login:** Create a new account to access your private planner.
+2.  **Add an Exam:** * Click "Add New Item".
+    * Select Category: "Exam".
+    * Set a date in the future.
+    * *Check:* Verify it appears with a Red indicator.
+3.  **Test Overdue Logic:**
+    * Add a task with a date in the *past*.
+    * *Check:* Verify it highlights as **OVERDUE**.
+4.  **Complete a Task:**
+    * Click the "Done" checkmark.
+    * *Check:* Verify it moves to the "Recently Completed" history list.
+
+---
+
+## System Architecture
+
+`User` → `HTML Dashboard` → `Flask Controller (Python)` → `SQLite Database` → `Updated View`
+
+---
